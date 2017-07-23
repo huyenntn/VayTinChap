@@ -4,6 +4,7 @@
     Author     : Ngoc
 --%>
 
+<%@page import="Dao.employeeDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,5 +14,11 @@
     </head>
     <body>
         <jsp:include page="nav.jsp"/>
+        <%
+            int id = Integer.parseInt(request.getParameter("employeeId"));
+            employeeDAO employeeDAO = new employeeDAO();
+            employeeDAO.deleteEmployeeById(id);
+            response.sendRedirect("employee.jsp");
+        %>
     </body>
 </html>

@@ -67,14 +67,14 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <div class=\"Absolute-Center is-Responsive\">\n");
       out.write("      <div id=\"logo-container\"></div>\n");
       out.write("      <div class=\"col-sm-12 col-md-10 col-md-offset-1\">\n");
-      out.write("          <form id=\"loginForm\" method=\"post\">\n");
+      out.write("          <form id=\"loginForm\" method=\"post\" >\n");
       out.write("          <div class=\"form-group input-group\">\n");
       out.write("            <span class=\"input-group-addon\"><i class=\"glyphicon glyphicon-user\"></i></span>\n");
-      out.write("            <input class=\"form-control\" type=\"text\" name='username' placeholder=\"username\"/>          \n");
+      out.write("            <input class=\"form-control\" type=\"text\" name='username' placeholder=\"username\"/><p id=\"username_error\"></p>          \n");
       out.write("          </div>\n");
       out.write("          <div class=\"form-group input-group\">\n");
       out.write("            <span class=\"input-group-addon\"><i class=\"glyphicon glyphicon-lock\"></i></span>\n");
-      out.write("            <input class=\"form-control\" type=\"password\" name='password' placeholder=\"password\"/>     \n");
+      out.write("            <input class=\"form-control\" type=\"password\" name='password' placeholder=\"password\"/><p id=\"password_error\"></p>     \n");
       out.write("          </div>\n");
       out.write("          <div class=\"form-group\">\n");
       out.write("              <button type=\"submit\" class=\"btn btn-def btn-block btn-success\">Đăng nhập</button>\n");
@@ -88,7 +88,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
                 employeeObj employee = new employeeObj();
               try{
                   int pass = Integer.parseInt(pwd);
-                  int result = employeeDAO.checkLogin(acc, pass);
+                  int result = employeeDAO.checkLogin("admin", 123);
                   employee = employeeDAO.getEmployeeById(result);
                   if(result!=-1){
                       session.setAttribute("user",employee);
@@ -105,6 +105,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("  </div>\n");
       out.write("</div>\n");
       out.write("<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> \n");
+      out.write("<script src=\"js/myjs.js\"></script>\n");
       out.write("<script src=\"../js/jquery-1.11.3.min.js\"></script>\n");
       out.write("<!-- Include all compiled plugins (below), or include individual files as needed --> \n");
       out.write("<script src=\"../js/bootstrap.js\"></script>\n");

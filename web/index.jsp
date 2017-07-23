@@ -4,6 +4,8 @@
     Author     : Ngoc
 --%>
 
+<%@page import="Dao.htmldisplayDAO"%>
+<%@page import="Modal.htmldisplayObj"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Modal.typeDealObj"%>
 <%@page import="Dao.typeDealDAO"%>
@@ -12,11 +14,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Vay Tín Chấp</title>
         <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
-    <title>Ngân hàng VPBank</title>
     <link rel="icon" href="images/icon_fav.ico" type="image/x-icon">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
@@ -119,9 +120,15 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-        <!------------Mở thẻ------------------------->
+        <%
+        htmldisplayObj htmlObj = new htmldisplayObj();
+        htmldisplayDAO htmldisplayDAO = new htmldisplayDAO();
+        ArrayList<htmldisplayObj> htmllist = new ArrayList<htmldisplayObj>();
+        htmllist = htmldisplayDAO.getAllHtml();
+    %>
+<!------------Mở thẻ------------------------->
 <div class="landing-persion" id="landing_opencard">
-	<img class="is_web" src="images/landing_00.jpg">
+    <img class="is_web" src="images/landing_00.jpg">
     <img class="is_wap" src="images/landing_00_mobile.jpg">
     <p class="landing-home-btn">
 			<a  href='mo-the.jsp'>
@@ -142,62 +149,39 @@
         <div class="row">
             <div class="center">
                             <div class="boxitem">
-                <div class="titlebox"><span class="titletxt">KH là CBNV có thu nhập từ lương</span></div>
+                                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(1).getHtmlcode()%></span></div>
                 <div class="contentbox">
-                    <div class="describlebox"><span>Khách hàng đang công tác tại các doanh nghiệp, nhận lương bằng tiền mặt hoặc chuyển khoản</span></div>
+                    <div class="describlebox"><span><%=htmldisplayDAO.getHtmlById(2).getHtmlcode()%></span></div>
                     <div class="profilelisbox">
-                        <span style="font-weight: bold">Hồ sơ yêu cầu:</span>
-                        <ul>
-                            <li><span>Bản sao CMND/Hộ chiếu/Thẻ căn cước</span></li>
-                            <li><span>Chứng từ chứng minh nơi ở hiện tại</span></li>
-                            <li><span>Hồ sơ chứng minh thu nhập và công việc</span></li>
-                        </ul>
+                        <%=htmldisplayDAO.getHtmlById(3).getHtmlcode() %>
                     </div>
                 </div>
             </div>
             <div class="boxitem">
-                <div class="titlebox"><span class="titletxt">KH nhận lương qua VPBank</span></div>
+                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(4).getHtmlcode()%></span></div>
                 <div class="contentbox">
-                    <div class="describlebox"><span>Khách hàng đã nhận lương qua tài khoản mở tại VPBank tối thiểu 1 tháng</span></div>
+                    <div class="describlebox"><span><%=htmldisplayDAO.getHtmlById(5).getHtmlcode()%></span></div>
                     <div class="profilelisbox">
-                        <span style="font-weight: bold">Hồ sơ yêu cầu:</span>
-                        <ul>
-                            <li><span>Bản sao CMND/Hộ chiếu/Thẻ căn cước</span></li>
-                            <li><span>Chứng từ chứng minh nơi ở hiện tại</span></li>
-                            <li><span>Bản sao hợp đồng lao động</span></li>
-                        </ul>
+                        <%=htmldisplayDAO.getHtmlById(6).getHtmlcode()%>
                     </div>
                 </div>
             </div>
             <div class="boxitem">
-                <div class="titlebox"><span class="titletxt">KH là CBNV có thu nhập từ lương chuyển khoản</span></div>
+                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(7).getHtmlcode()%></span></div>
                 <div class="contentbox">
-                    <div class="describlebox"><span>Khách hàng là CBNV nhận lương chuyển khoản từ 15 triệu/tháng</span>
-                        <ul  style="font-style: italic; font-size: 12px; list-style: none; margin-top: 10px;">
-                            <li><span>*Lãi xuất ưu đãi</span></li>
-                            <li><span>*Phê duyệt trong 2h</span></li>
-                        </ul>
+                    <div class="describlebox"><span><%=htmldisplayDAO.getHtmlById(8).getHtmlcode()%></span>
                     </div>
                     <div class="profilelisbox">
-                        <span style="font-weight: bold">Hồ sơ yêu cầu:</span>
-                        <ul>
-                            <li><span>Bản sao CMND/Hộ chiếu/Thẻ căn cước</span></li>
-                            <li><span>Chứng từ chứng minh nơi ở hiện tại</span></li>
-                            <li><span>Hồ sơ chứng minh thu nhập và công việc</span></li>
-                        </ul>
+                        <%=htmldisplayDAO.getHtmlById(9).getHtmlcode()%>
                     </div>
                 </div>
             </div>
             <div class="boxitem">
-                <div class="titlebox"><span class="titletxt">KH là giáo viên</span></div>
+                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(10).getHtmlcode()%></span></div>
                 <div class="contentbox">
-                    <div class="describlebox"><span>Khách hàng là giáo viên đang công tác tại tất cả các trường, từ mầm non đến đại học</span></div>
+                    <div class="describlebox"><span><%=htmldisplayDAO.getHtmlById(11).getHtmlcode()%></span></div>
                     <div class="profilelisbox">
-                        <span style="font-weight: bold">Hồ sơ yêu cầu:</span>
-                        <ul>
-                            <li><span>Bản sao CMND/Hộ chiếu/Thẻ căn cước</span></li>
-                            <li><span>Hồ sơ chứng minh thu nhập và môn học giảng dạy</span></li>
-                        </ul>
+                        <%=htmldisplayDAO.getHtmlById(12).getHtmlcode()%>
                     </div>
                 </div>
             </div>
@@ -217,34 +201,21 @@
             <div class="row">
                 <div class="center">
             <div class="boxitem2">
-                <div class="titlebox"><span class="titletxt">Ưu điểm sản phẩm</span></div>
+                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(13).getHtmlcode()%></span></div>
                 <div class="contentbox">
-                    <ul>
-                            <li><span>Không giới hạn số năm hoạt động</span></li>
-                            <li><span>Không ràng buộc doanh thu tối thiểu</span></li>
-                            <li><span>Không yêu cầu tài sản thế chấp</span></li>
-                            <li><span>Hồ sơ chứng minh mục đích vay đơn giản</span></li>
-                            <li><span>Lãi suất cạnh tranh</span></li>
-                            <li><span>Hạn mức cho vay lên đến 5 tỷ đồng</span></li>
-                            <li><span>Thời gian vay: 36 tháng</span></li>
-                        </ul>
+                    <%=htmldisplayDAO.getHtmlById(14).getHtmlcode()%>
                 </div>
             </div>
             <div class="boxitem2">
-                <div class="titlebox"><span class="titletxt">Hồ sơ yêu cầu</span></div>
+                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(15).getHtmlcode()%></span></div>
                 <div class="contentbox">
-                    <ul>
-                        <li><span>Báo cáo tài chính</span></li>
-                        <li><span>Hồ sơ chứng minh mục đích sử dụng vốn</span></li>
-                    </ul>
+                    <%=htmldisplayDAO.getHtmlById(16).getHtmlcode()%>
                 </div>
             </div>
             <div class="boxitem2">
-                <div class="titlebox"><span class="titletxt">Đối tượng khách hàng</span></div>
+                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(17).getHtmlcode()%></span></div>
                 <div class="contentbox">
-                    <ul>
-                        <li><span>Khách hàng Doanh nghiệp vừa và nhỏ</span></li>
-                    </ul>
+                    <%=htmldisplayDAO.getHtmlById(18).getHtmlcode()%>
                 </div>
             </div>
         </div>
@@ -263,80 +234,49 @@
             <div class="row">
                 <div class="center">
             <div class="boxitem3">
-                <div class="titlebox"><span class="titletxt">Vay trả góp theo ngày</span></div>
+                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(19).getHtmlcode()%></span></div>
                 <div class="contentbox">
                     <div class="describlebox">
-                        <span style="font-weight: bold">Ưu điểm sản phẩm</span>
-                        <ul>
-                            <li><span>Vay từ 10 triệu đến 50 triệu trong tối đa 6 tháng</span></li>
-                            <li><span>Không thế chấp, không chứng minh thu nhập</span></li>
-                            <li><span>Nhân viên thu tiền tận nơi mỗi ngày</span></li>
-                        </ul>
+                        <%=htmldisplayDAO.getHtmlById(20).getHtmlcode()%>
                     </div>
                     <div class="profilelisbox">
-                        <ul style="list-style: none">
-                            <li><span style="font-weight: bold">Dành cho: </span><span>Khách hàng tiểu thương, Hộ kinh doanh tại các chợ</span></li>
-                            <li><span style="font-weight: bold">Hồ sơ yêu cầu: </span><span>Bản sao CMND, Chứng từ chứng minh nơi ở hiện tại</span></li>
-                        </ul>
+                        <%=htmldisplayDAO.getHtmlById(21).getHtmlcode()%>
                         
                     </div>
                 </div>
             </div>
             <div class="boxitem3">
-                <div class="titlebox"><span class="titletxt">Vay trả góp theo tháng</span></div>
+                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(22).getHtmlcode()%></span></div>
                 <div class="contentbox">
                     <div class="describlebox">
-                        <span style="font-weight: bold">Ưu điểm sản phẩm</span>
-                        <ul>
-                            <li><span>Vay từ 20 triệu đến 300 triệu trong tối đa 3 năm</span></li>
-                            <li><span>Trả góp tiện lợi hàng tháng</span></li>
-                        </ul>
+                        <%=htmldisplayDAO.getHtmlById(23).getHtmlcode()%>
                     </div>
                     <div class="profilelisbox">
-                        <ul style="list-style: none">
-                            <li><span style="font-weight: bold">Dành cho: </span><span>Khách hàng tiểu thương, Hộ kinh doanh tại các chợ hoặc các tuyến phố</span></li>
-                            <li><span style="font-weight: bold">Hồ sơ yêu cầu: </span><span>Bản sao CMND, Chứng từ chứng minh nơi ở hiện tại</span></li>
-                        </ul>
-                        
+                        <%=htmldisplayDAO.getHtmlById(24).getHtmlcode()%>
                     </div>
                 </div>
             </div>
             <div class="boxitem3">
-                <div class="titlebox"><span class="titletxt">Vay siêu tốc</span></div>
+                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(25).getHtmlcode()%></span></div>
                 <div class="contentbox">
                     <div class="describlebox">
-                        <span style="font-weight: bold">Ưu điểm sản phẩm</span>
-                        <ul>
-                            <li><span>Vay đến 10 triệu trong tối đa 3 năm</span></li>
-                            <li><span>Thời gian xử lý hồ sơ và giải ngân siêu nhanh</span></li>
-                            <li><span>Không thế chấp, không chứng minh thu nhập</span></li>
-                            <li><span>Khách hàng được chủ động quyết định 1 trong 4 gói vay hấp dẫn</span></li>
-                        </ul>
+                        <%=htmldisplayDAO.getHtmlById(26).getHtmlcode()%>
                     </div>
                     <div class="profilelisbox">
-                        <ul style="list-style: none">
-                            <li><span style="font-weight: bold">Dành cho: </span><span>Khách hàng tiểu thương, Hộ kinh doanh tại các chợ/tuyến phố và có quyền sử dụng sạp chợ hoặc quyền sở hữu địa điểm kinh doanh</span></li>
-                            <li><span style="font-weight: bold">Hồ sơ yêu cầu: </span><span>Bản sao CMND, Chứng từ chứng minh nơi ở hiện tại, Chứng từ chứng minh quyền sử dụng sạp chợ hoặc quyền sở hữu địa điểm kinh doanh</span></li>
-                        </ul>
-                        
+                        <%=htmldisplayDAO.getHtmlById(27).getHtmlcode()%>
                     </div>
                 </div>
             </div>
             <div class="boxitem3">
-                <div class="titlebox"><span class="titletxt">Vay Thuế+</span></div>
+                <div class="titlebox"><span class="titletxt"><%=htmldisplayDAO.getHtmlById(28).getHtmlcode()%></span></div>
                 <div class="contentbox">
                     <div class="describlebox">
-                        <span style="font-weight: bold">Ưu điểm sản phẩm</span>
-                        <ul>
-                            <li><span>Vay đến 175 triệu trong tối đa 4 năm</span></li>
-                            <li><span>Thủ tục cực kỳ đơn giản: 01 biên lai nộp Thuế khoán kỳ gần nhất</span></li>
-                            <li><span>Không thế chấp, không chứng minh thu nhập</span></li>
-                        </ul>
+                        <%=htmldisplayDAO.getHtmlById(29).getHtmlcode()%>
                     </div>
                     <div class="profilelisbox">
-                        <ul style="list-style: none">
-                            <li><span style="font-weight: bold">Hồ sơ yêu cầu:</span><span>Bản sao CMND, Chứng từ chứng minh nơi ở hiện tại, 01 biên lai nộp Thuế khoán</span></li>
-                        </ul>
+                        <%=htmldisplayDAO.getHtmlById(30).getHtmlcode()%>
+                        
+                    </div>
                         
                     </div>
                 </div>
@@ -345,27 +285,15 @@
             </div>
       </div> 
     </div>
-	<p class="landing-vp-phone"><a onclick='confirmcall()'>19001234</a></p>
-	</div>
+	<p class="landing-vp-phone-index"><a onclick='confirmcall()'>19001234</a></p>
+
+      
 <a href="#" class="vp-gotop">
     	<img src="images/vp_gotop.png"><br>
         Lên đầu trang
     </a>
+<jsp:include page="footer.jsp"/>
 
-<div class="mdl-footer">
-	<div class="container">
-    	<div class="footer-content">
-		<p><a href='index.jsp'><img src="images/vp_logo_footer.png"/></a></p>
-        <p><strong>Ngân hàng TMCP Việt Nam Thịnh Vượng VPBank</strong> © 2017<br>
-        89 Láng Hạ, Đống Đa, Hà Nội<br>
-        Email: customercare@vpbank.com.vn<br></p>
-        </div>
-		
-		<p class="footer-social">
-		<a href='https://www.facebook.com/VPBankOnline/'><img src="images/vp_06.png"/></a>
-		<a href='http://www.youtube.com/playlist?list=PLqmPfVuc7VoNHUOBiAi3mgsRgp6DAv590'><img src="images/vp_07.png"/></a></p>
-    </div>
-</div> 
         <script src="js/jquery-ui.js"></script> 
 <script src="js/owl.carousel.min.js"></script> 
 
@@ -387,6 +315,7 @@
 </script>
 
 <script src="js/jquery.nav.js"></script> 
+<script src="js/myjs.js"></script>
 <script>
 				$(document).ready(function(){
 	//one page selection page

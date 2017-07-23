@@ -73,19 +73,19 @@
             * Liên hệ tư vấn trong 48 giờ
         </p>
 	<div class="form-group-register">
-        	<form method="post">
+            <form name="formresign" method="post" id="formresign" >
                 <div class="form-group-register">
                     <p class="form-vp-item">
-                        <input name="name" type="text" id="ctl12_hovaten" class="ho_va_ten" placeholder="Họ và tên" /><span class="sp-star-input">*</span>
+                        <input name="name" type="text" id="ctl12_hovaten" class="ho_va_ten" placeholder="Họ và tên" /><span class="sp-star-input">*</span><p id="ctl12_hovaten_error"></p>
                     </p>
                     <p class="form-vp-item">
-                        <input name="phone" type="text" id="ctl12_sodienthoai" class="so_dien_thoai" placeholder="Số điện thoại" /><span class="sp-star-input">*</span>
+                        <input name="phone" type="text" id="ctl12_sodienthoai" class="so_dien_thoai" placeholder="Số điện thoại" /><span class="sp-star-input">*</span><p id="ctl12_sodienthoai_error"></p>
                     </p>
                     <p class="form-vp-item">
                         <input name="email" type="text" id="ctl12_email" class="email" placeholder="Email" />
                     </p>
                     <p class="form-vp-item">
-                        <input name="address" type="text" id="ctl12_DiaChi" class="dia_chi" placeholder="Địa chỉ kinh doanh" /><span class="sp-star-input">*</span>
+                        <input name="address" type="text" id="ctl12_DiaChi" class="dia_chi" placeholder="Địa chỉ kinh doanh" /><span class="sp-star-input">*</span><p id="ctl12_DiaChi_error"></p>
                     </p>
 
                      <p class="form-vp-item" style="margin-bottom:10px;">
@@ -95,7 +95,7 @@
                         Nhập mã nhân viên VPBank đang tư vấn hồ sơ vay của Quý khách (nếu có)
                     </p>
                     <p class="form-btn-vp">
-                        <button type="submit" value="Đăng ký" class="btn btn-success " >Đăng ký</button>
+                        <button type="submit" value="Đăng ký" class="btn btn-success btnresignclient" >Đăng ký</button>
                     </p>
                      <p class="form-register-notice">Lưu ý: Bằng việc đăng ký, Quý khách đã đọc và đồng ý với thể lệ chương trình dưới đây</p>
                 </div>
@@ -109,11 +109,14 @@
                     String email = request.getParameter("email");
                     int phone = Integer.parseInt(request.getParameter("phone"));
                     String address = request.getParameter("address");
-                    int employeesupport = Integer.parseInt(request.getParameter("employeesupport"));
+                    int employeesupport = 0;
+                    if(!(request.getParameter("employeesupport")).equals("")){
+                        employeesupport = Integer.parseInt(request.getParameter("employeesupport"));
+                    }
                     String company = "";
                     String career = "";
                     int companyNum = 0;
-                    int typedealId = 5;
+                    int typedealId = 3;
                     int employeeId = 0;
                     employeeObj employee = new employeeObj();
                     employeeDAO employeeDAO = new employeeDAO();
@@ -290,20 +293,7 @@ Hồ sơ yêu cầu: Bản sao CMND, Chứng từ chứng minh nơi ở hiện t
         Lên đầu trang
     </a>
 
-<div class="mdl-footer">
-	<div class="container">
-    	<div class="footer-content">
-		<p><a href='index.jsp'><img src="images/vp_logo_footer.png"/></a></p>
-        <p><strong>Ngân hàng TMCP Việt Nam Thịnh Vượng VPBank</strong> © 2017<br>
-        89 Láng Hạ, Đống Đa, Hà Nội<br>
-        Email: customercare@vpbank.com.vn<br></p>
-        </div>
-		
-		<p class="footer-social">
-		<a href='https://www.facebook.com/VPBankOnline/'><img src="images/vp_06.png"/></a>
-		<a href='http://www.youtube.com/playlist?list=PLqmPfVuc7VoNHUOBiAi3mgsRgp6DAv590'><img src="images/vp_07.png"/></a></p>
-    </div>
-</div> 
+<jsp:include page="footer.jsp"/>
         <script src="js/jquery-ui.js"></script> 
 <script src="js/owl.carousel.min.js"></script> 
 
@@ -325,6 +315,7 @@ Hồ sơ yêu cầu: Bản sao CMND, Chứng từ chứng minh nơi ở hiện t
 </script>
 
 <script src="js/jquery.nav.js"></script> 
+<script src="js/myjs.js"></script>
 <script>
 				$(document).ready(function(){
 	//one page selection page

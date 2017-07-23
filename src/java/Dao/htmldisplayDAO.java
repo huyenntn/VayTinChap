@@ -18,9 +18,9 @@ import java.util.ArrayList;
  * @author Ngoc
  */
 public class htmldisplayDAO {
-    public ArrayList<htmldisplayObj> getAllProfile() throws ClassNotFoundException, SQLException{
+    public ArrayList<htmldisplayObj> getAllHtml() throws ClassNotFoundException, SQLException{
         Connection con = database.getConnection();
-        PreparedStatement st = con.prepareStatement("SELECT * FROM profile");
+        PreparedStatement st = con.prepareStatement("SELECT * FROM htmldisplay");
         ResultSet rs = st.executeQuery();
         ArrayList<htmldisplayObj> list = new ArrayList<htmldisplayObj>();
         while(rs.next()){

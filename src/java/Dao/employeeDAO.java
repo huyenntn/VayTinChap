@@ -73,12 +73,16 @@ public class employeeDAO {
    
    public void updateEmployee(int employeeId, String employeeName, String acc, int pass) throws ClassNotFoundException, SQLException{
         Connection conn = database.getConnection();
+        
         PreparedStatement st = conn.prepareStatement("UPDATE employee SET employeeName = ?, acc=?, pass=? WHERE employeeId = ?");
+        st.executeQuery("SET NAMES 'UTF8'");
+        st.executeQuery("SET CHARACTER SET 'UTF8'");
         st.setString(1, employeeName);
         st.setString(2, acc);
         st.setInt(3, pass);
         st.setInt(4, employeeId);
         st.executeUpdate();
+        conn.close();
    }
    
    public employeeObj getEmployeeById(int employeeId) throws ClassNotFoundException, SQLException{

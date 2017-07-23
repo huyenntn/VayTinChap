@@ -7,6 +7,7 @@ package Dao;
 
 import Database.database;
 import Modal.customerObj;
+import Modal.employeeObj;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

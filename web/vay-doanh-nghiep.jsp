@@ -77,25 +77,25 @@
     	    ĐĂNG KÝ VAY NHẬN NGAY KHUYẾN MẠI<br/>
            <span style="font-size:20px;"> DÀNH CHO 190 KHÁCH HÀNG GIẢI NGÂN NHANH NHẤT</span>
     	</h2>
-        <form method="post">
+            <form name="formresign" id="formresign" method="post" >
             <div class="form-group-register">
                 <p class="form-vp-item">
-                    <input name="name" type="text" id="ctl12_hovaten" class="ho_va_ten" placeholder="Họ và tên" /><span class="sp-star-input">*</span>
+                    <input name="name" type="text" id="ctl12_hovaten" class="ho_va_ten" placeholder="Họ và tên" /><span class="sp-star-input">*</span><p id="ctl12_hovaten_error"></p>
                 </p>
                 <p class="form-vp-item">
-                    <input name="phone" type="text" id="ctl12_sodienthoai" class="so_dien_thoai" placeholder="Số điện thoại" /><span class="sp-star-input">*</span>
+                    <input name="phone" type="text" id="ctl12_sodienthoai" class="so_dien_thoai" placeholder="Số điện thoại" /><span class="sp-star-input">*</span><p id="ctl12_sodienthoai_error"></p>
                 </p>
                 <p class="form-vp-item">
                     <input name="email" type="text" id="ctl12_email" class="email" placeholder="Email" />
                 </p>
                 <p class="form-vp-item">
-                    <input name="company" type="text" id="ctl12_TenDoanhNghiep" class="ten_doanh_nghiep" placeholder="Tên doanh nghiệp" /><span class="sp-star-input">*</span>
+                    <input name="company" type="text" id="ctl12_TenDoanhNghiep" class="ten_doanh_nghiep" placeholder="Tên doanh nghiệp" /><span class="sp-star-input">*</span><p id="ctl12_TenDoanhNghiep_error"></p>
                 </p>
                 <p class="form-vp-item">
-                    <input name="career" type="text" id="ctl12_NganhNgheKinhDoanh" class="nganh_nghe_kinh_doanh" placeholder="Ngành nghề kinh doanh" /><span class="sp-star-input">*</span>
+                    <input name="career" type="text" id="ctl12_NganhNgheKinhDoanh" class="nganh_nghe_kinh_doanh" placeholder="Ngành nghề kinh doanh" /><span class="sp-star-input">*</span><p id="ctl12_NganhNgheKinhDoanh_error"></p>
                 </p>
                 <p class="form-vp-item">
-                    <input name="companyNum" type="text" id="ctl12_SoDangKyKinhDoanh" class="so_dang_ky_kinh_doanh" placeholder="Số đăng ký kinh doanh" /><span class="sp-star-input">*</span>
+                    <input name="companyNum" type="text" id="ctl12_SoDangKyKinhDoanh" class="so_dang_ky_kinh_doanh" placeholder="Số đăng ký kinh doanh" /><span class="sp-star-input">*</span><p id="ctl12_SoDangKyKinhDoanh_error"></p>
                 </p>
                 <p class="form-vp-item" style="margin-bottom:10px;">
                     <input name="employeesupport" type="text" id="ctl12_MaNhanVien" class="ma_nhan_vien" placeholder="Mã nhân viên VPBank" />
@@ -104,7 +104,7 @@
                     Nhập mã nhân viên VPBank đang tư vấn hồ sơ vay của Quý khách (nếu có)
                 </p>
                 <p class="form-btn-vp">
-                    <button type="submit" value="Đăng ký" class="btn btn-success " >Đăng ký</button>
+                    <button type="submit" value="Đăng ký" class="btn btn-success btnresignclient" >Đăng ký</button>
                 </p>
               <p class="form-register-notice">Lưu ý: Bằng việc đăng ký, Quý khách đã đọc và đồng ý với thể lệ chương trình dưới đây</p>
         </div>
@@ -118,11 +118,14 @@
                     String email = request.getParameter("email");
                     int phone = Integer.parseInt(request.getParameter("phone"));
                     String address = "";
-                    int employeesupport = Integer.parseInt(request.getParameter("employeesupport"));
+                    int employeesupport = 0;
+                    if(!(request.getParameter("employeesupport")).equals("")){
+                        employeesupport = Integer.parseInt(request.getParameter("employeesupport"));
+                    }
                     String company = request.getParameter("company");
                     String career = request.getParameter("career");
                     int companyNum = Integer.parseInt(request.getParameter("companyNum"));
-                    int typedealId = 3;
+                    int typedealId = 4;
                     int employeeId = 0;
                     employeeObj employee = new employeeObj();
                     employeeDAO employeeDAO = new employeeDAO();
@@ -264,20 +267,7 @@ Chúng tôi cam kết thực hiện đúng và hoàn toàn chịu trách nhiệm
         Lên đầu trang
     </a>
 
-<div class="mdl-footer">
-	<div class="container">
-    	<div class="footer-content">
-		<p><a href='index.jsp'><img src="images/vp_logo_footer.png"/></a></p>
-        <p><strong>Ngân hàng TMCP Việt Nam Thịnh Vượng VPBank</strong> © 2017<br>
-        89 Láng Hạ, Đống Đa, Hà Nội<br>
-        Email: customercare@vpbank.com.vn<br></p>
-        </div>
-		
-		<p class="footer-social">
-		<a href='https://www.facebook.com/VPBankOnline/'><img src="images/vp_06.png"/></a>
-		<a href='http://www.youtube.com/playlist?list=PLqmPfVuc7VoNHUOBiAi3mgsRgp6DAv590'><img src="images/vp_07.png"/></a></p>
-    </div>
-</div> 
+<jsp:include page="footer.jsp"/>
         <script src="js/jquery-ui.js"></script> 
 <script src="js/owl.carousel.min.js"></script> 
 
@@ -299,6 +289,7 @@ Chúng tôi cam kết thực hiện đúng và hoàn toàn chịu trách nhiệm
 </script>
 
 <script src="js/jquery.nav.js"></script> 
+<script src="js/myjs.js"></script>
 <script>
 				$(document).ready(function(){
 	//one page selection page

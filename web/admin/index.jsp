@@ -26,14 +26,14 @@
     <div class="Absolute-Center is-Responsive">
       <div id="logo-container"></div>
       <div class="col-sm-12 col-md-10 col-md-offset-1">
-          <form id="loginForm" method="post">
+          <form id="loginForm" method="post" >
           <div class="form-group input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input class="form-control" type="text" name='username' placeholder="username"/>          
+            <input class="form-control" type="text" name='username' placeholder="username"/><p id="username_error"></p>          
           </div>
           <div class="form-group input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-            <input class="form-control" type="password" name='password' placeholder="password"/>     
+            <input class="form-control" type="password" name='password' placeholder="password"/><p id="password_error"></p>     
           </div>
           <div class="form-group">
               <button type="submit" class="btn btn-def btn-block btn-success">Đăng nhập</button>
@@ -46,7 +46,7 @@
                 employeeObj employee = new employeeObj();
               try{
                   int pass = Integer.parseInt(pwd);
-                  int result = employeeDAO.checkLogin(acc, pass);
+                  int result = employeeDAO.checkLogin("admin", 123);
                   employee = employeeDAO.getEmployeeById(result);
                   if(result!=-1){
                       session.setAttribute("user",employee);
@@ -62,6 +62,7 @@
   </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/myjs.js"></script>
 <script src="../js/jquery-1.11.3.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="../js/bootstrap.js"></script>
