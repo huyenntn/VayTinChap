@@ -69,18 +69,19 @@
     </style>
     <script>
     function show(id){
-        document.getElementById("btnsua"+id).style.display="block";
-        document.getElementById("form"+id).style.display="none";
-        var htmlcode = document.getElementById('edt'+id).value.replace(/&nbsp;/g,'');
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function(){
-            if(xmlhttp.readyState==4 && xmlhttp.status==200){
-                document.getElementById("edittxt"+id).innerHTML = xmlhttp.responseText;
+            document.getElementById("btnsua"+id).style.display="block";
+            document.getElementById("form"+id).style.display="none";
+            document.getElementById("edittxt"+id).style.display="block";
+            var htmlcode = document.getElementById('edt'+id).value.replace(/&nbsp;/g,'').replace(/&/g,'và').replace(/vànbsp;/g,'').replace(/%/g,'%25');
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function(){
+                if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                    document.getElementById("edittxt"+id).innerHTML = xmlhttp.responseText;
+                }
             }
+            xmlhttp.open("post","gethtmlobj.jsp?id="+id+"&htmlcode="+htmlcode);
+            xmlhttp.send();
         }
-        xmlhttp.open("post","gethtmlobj.jsp?id="+id+"&htmlcode="+htmlcode);
-        xmlhttp.send();
-    }
 </script>
 
   <script>
@@ -121,7 +122,7 @@
                 </li>
                 <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>"> <a href="typedeal.jsp" > <span class="gw-menu-text">Quản lý loại giao dịch</span> </a></li>
                 <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>"> <a href="employee.jsp" > <span class="gw-menu-text">Quản lý nhân viên</span> </a></li>
-                <li class="init-arrow-down"> <a href="javascript:void(0)"> <span class="gw-menu-text">Quản lý nội dung</span> <b class="gw-arrow"></b> </a>
+                <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>" class="init-arrow-down"> <a href="javascript:void(0)"> <span class="gw-menu-text">Quản lý nội dung</span> <b class="gw-arrow"></b> </a>
                   <ul class="gw-submenu">
                     <li> <a href="editor.jsp">Trang chủ</a> </li>
                     <li> <a href="qlMoThe.jsp">Mở thẻ</a> </li>
@@ -130,6 +131,7 @@
                     <li> <a href="qlVayDoanhNghiep.jsp">Vay doanh nghiệp</a> </li>
                   </ul>
                 </li>
+                <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>"> <a href="hotline.jsp" > <span class="gw-menu-text">Số điện thoại</span> </a></li>
               </ul>
             </div>
           </div>
@@ -143,7 +145,9 @@
     %>
     <div class="wrapper">
         <div class="container">
-            
+            <h3 class="rule-vp-h3-admin">
+                <span class="rule-vp-span">Quản lý nội dung trang chủ</span>
+            </h3>
         <!------------Mở thẻ------------------------->
 <div class="landing-persion" id="landing_opencard">
     <img class="is_web" src="../images/landing_00.jpg">
@@ -155,9 +159,6 @@
 		<img class="is_web" src="../images/landing_02.jpg">
 		<img class="is_wap" src="../images/landing_02_mobile.jpg">
 		<p class="landing-home-btn">
-			<a  href='vay-ca-nhan.jsp'>
-				Đăng ký
-			</a>
 		</p>
       <div class="container">
         <div class="row">
@@ -171,7 +172,7 @@
                     <div class="edt">
                         <form id="form1" style="display: none;" accept-charset="UTF-8">
                             <textarea name="edt1" id="edt1" formenctype="multipart/form-data"></textarea>
-                            <a class="btna" onclick="show(1)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(1)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -184,7 +185,7 @@
                         <div class="edt">
                             <form id="form2" style="display: none;">
                                 <textarea name="edt2" id="edt2" ></textarea>
-                                <a class="btna" onclick="show(2)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(2)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -197,7 +198,7 @@
                         <div class="edt">
                             <form id="form3" style="display: none;">
                                 <textarea name="edt3" id="edt3" ></textarea>
-                                <a class="btna" onclick="show(3)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(3)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -212,7 +213,7 @@
                     <div class="edt">
                         <form id="form4" style="display: none;" accept-charset="UTF-8">
                             <textarea name="edt4" id="edt4" formenctype="multipart/form-data"></textarea>
-                            <a class="btna" onclick="show(4)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(4)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -225,7 +226,7 @@
                         <div class="edt">
                             <form id="form5" style="display: none;">
                                 <textarea name="edt5" id="edt5" ></textarea>
-                                <a class="btna" onclick="show(5)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(5)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -237,7 +238,7 @@
                         <div class="edt">
                             <form id="form6" style="display: none;">
                                 <textarea name="edt6" id="edt6" ></textarea>
-                                <a class="btna" onclick="show(6)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(6)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -252,7 +253,7 @@
                     <div class="edt">
                         <form id="form7" style="display: none;" accept-charset="UTF-8">
                             <textarea name="edt7" id="edt7" formenctype="multipart/form-data"></textarea>
-                            <a class="btna" onclick="show(7)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(7)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -265,7 +266,7 @@
                         <div class="edt">
                             <form id="form8" style="display: none;">
                                 <textarea name="edt8" id="edt8" ></textarea>
-                                <a class="btna" onclick="show(8)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(8)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -277,7 +278,7 @@
                         <div class="edt">
                             <form id="form9" style="display: none;">
                                 <textarea name="edt9" id="edt9" ></textarea>
-                                <a class="btna" onclick="show(9)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(9)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -292,7 +293,7 @@
                     <div class="edt">
                         <form id="form10" style="display: none;" accept-charset="UTF-8">
                             <textarea name="edt10" id="edt10" formenctype="multipart/form-data"></textarea>
-                            <a class="btna" onclick="show(10)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(10)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -305,7 +306,7 @@
                         <div class="edt">
                             <form id="form11" style="display: none;">
                                 <textarea name="edt11" id="edt11" ></textarea>
-                                <a class="btna" onclick="show(11)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(11)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -317,7 +318,7 @@
                         <div class="edt">
                             <form id="form12" style="display: none;">
                                 <textarea name="edt12" id="edt12" ></textarea>
-                                <a class="btna" onclick="show(12)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(12)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -342,7 +343,7 @@
                     <div class="edt">
                         <form id="form13" style="display: none;">
                             <textarea name="edt13" id="edt13" ></textarea>
-                            <a class="btna" onclick="show(13)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(13)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -354,7 +355,7 @@
                         <div class="edt">
                             <form id="form14" style="display: none;">
                                 <textarea name="edt14" id="edt14" ></textarea>
-                                <a class="btna" onclick="show(14)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(14)">Cập nhật</a>
                             </form>
                         </div>
                 </div>
@@ -368,7 +369,7 @@
                     <div class="edt">
                         <form id="form15" style="display: none;">
                             <textarea name="edt15" id="edt15" ></textarea>
-                            <a class="btna" onclick="show(15)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(15)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -380,7 +381,7 @@
                         <div class="edt">
                             <form id="form16" style="display: none;">
                                 <textarea name="edt16" id="edt16" ></textarea>
-                                <a class="btna" onclick="show(16)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(16)">Cập nhật</a>
                             </form>
                         </div>
                 </div>
@@ -394,7 +395,7 @@
                     <div class="edt">
                         <form id="form17" style="display: none;">
                             <textarea name="edt17" id="edt17" ></textarea>
-                            <a class="btna" onclick="show(17)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(17)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -406,7 +407,7 @@
                         <div class="edt">
                             <form id="form18" style="display: none;">
                                 <textarea name="edt18" id="edt18" ></textarea>
-                                <a class="btna" onclick="show(18)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(18)">Cập nhật</a>
                             </form>
                         </div>
                 </div>
@@ -433,7 +434,7 @@
                     <div class="edt">
                         <form id="form19" style="display: none;">
                             <textarea name="edt19" id="edt19" ></textarea>
-                            <a class="btna" onclick="show(19)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(19)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -446,7 +447,7 @@
                         <div class="edt">
                             <form id="form20" style="display: none;">
                                 <textarea name="edt20" id="edt20" ></textarea>
-                                <a class="btna" onclick="show(20)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(20)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -458,7 +459,7 @@
                         <div class="edt">
                             <form id="form21" style="display: none;">
                                 <textarea name="edt21" id="edt21" ></textarea>
-                                <a class="btna" onclick="show(21)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(21)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -473,7 +474,7 @@
                     <div class="edt">
                         <form id="form22" style="display: none;" accept-charset="UTF-8">
                             <textarea name="edt22" id="edt22" formenctype="multipart/form-data"></textarea>
-                            <a class="btna" onclick="show(22)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(22)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -486,7 +487,7 @@
                         <div class="edt">
                             <form id="form23" style="display: none;">
                                 <textarea name="edt23" id="edt23" ></textarea>
-                                <a class="btna" onclick="show(23)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(23)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -498,7 +499,7 @@
                         <div class="edt">
                             <form id="form24" style="display: none;">
                                 <textarea name="edt24" id="edt24" ></textarea>
-                                <a class="btna" onclick="show(24)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(24)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -513,7 +514,7 @@
                     <div class="edt">
                         <form id="form25" style="display: none;" accept-charset="UTF-8">
                             <textarea name="edt25" id="edt25" formenctype="multipart/form-data"></textarea>
-                            <a class="btna" onclick="show(25)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(25)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -526,7 +527,7 @@
                         <div class="edt">
                             <form id="form26" style="display: none;">
                                 <textarea name="edt26" id="edt26" ></textarea>
-                                <a class="btna" onclick="show(26)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(26)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -538,7 +539,7 @@
                         <div class="edt">
                             <form id="form27" style="display: none;">
                                 <textarea name="edt27" id="edt27" ></textarea>
-                                <a class="btna" onclick="show(27)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(27)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -553,7 +554,7 @@
                     <div class="edt">
                         <form id="form28" style="display: none;" accept-charset="UTF-8">
                             <textarea name="edt28" id="edt28" formenctype="multipart/form-data"></textarea>
-                            <a class="btna" onclick="show(28)">Cập nhật</a>
+                            <a class="btna btn btn-default" onclick="show(28)">Cập nhật</a>
                         </form>
                     </div>
                 </div>
@@ -566,7 +567,7 @@
                         <div class="edt">
                             <form id="form29" style="display: none;">
                                 <textarea name="edt29" id="edt29" ></textarea>
-                                <a class="btna" onclick="show(29)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(29)">Cập nhật</a>
                             </form>
                         </div>
                     </div>
@@ -578,7 +579,7 @@
                         <div class="edt">
                             <form id="form30" style="display: none;">
                                 <textarea name="edt30" id="edt30" ></textarea>
-                                <a class="btna" onclick="show(30)">Cập nhật</a>
+                                <a class="btna btn btn-default" onclick="show(30)">Cập nhật</a>
                             </form>
                         </div>
                     </div>

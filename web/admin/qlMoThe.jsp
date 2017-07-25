@@ -4,6 +4,10 @@
     Author     : Ngoc
 --%>
 
+<%@page import="Modal.employeeObj"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Dao.htmldisplayDAO"%>
+<%@page import="Modal.htmldisplayObj"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -63,33 +67,198 @@
         }
     </style>
     <script>
-    function show(id){
-        document.getElementById("btnsua"+id).style.display="block";
-        document.getElementById("form"+id).style.display="none";
-        var htmlcode = document.getElementById('edt'+id).value.replace(/&nbsp;/g,'');
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function(){
-            if(xmlhttp.readyState==4 && xmlhttp.status==200){
-                document.getElementById("edittxt"+id).innerHTML = xmlhttp.responseText;
+        function show(id){
+            document.getElementById("btnsua"+id).style.display="block";
+            document.getElementById("form"+id).style.display="none";
+            document.getElementById("edittxt"+id).style.display="block";
+            var htmlcode = document.getElementById('edt'+id).value.replace(/&nbsp;/g,'').replace(/&/g,'và').replace(/vànbsp;/g,'').replace(/%/g,'%25');
+            var params = "id="+id+"&htmlcode="+htmlcode;
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function(){
+                if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                    document.getElementById("edittxt"+id).innerHTML = xmlhttp.responseText;
+                }
             }
+            xmlhttp.open("post","gethtmlobj.jsp", true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send(params);
         }
-        xmlhttp.open("post","gethtmlobj.jsp?id="+id+"&htmlcode="+htmlcode);
-        xmlhttp.send();
-    }
-</script>
+    </script>
 
   <script>
     function asd(id)
     {
         document.getElementById("form"+id).style.display="block";
         document.getElementById("btnsua"+id).style.display="none";
-        document.getElementById("edittxt"+id).style.display="block";
+        document.getElementById("edittxt"+id).style.display="none";
         
     }
   </script> 
       
+                  
+        
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%
+            employeeObj employee1 = (employeeObj)session.getAttribute("user");
+            String user = employee1.getAcc();
+        %>
+        <!--navigation-->
+        <div class="gw-sidebar">
+          <div id="gw-sidebar" class="gw-sidebar">
+            <div class="nano-content">
+              <ul class="gw-nav gw-nav-list">
+                <li> 
+                    <form method="link" action="logout.jsp" style="text-align: center">
+                        <button type="submit" name="submit" class="submitbtn "><span style="margin-right: 10px; font-weight: bold;"><%=employee1.getEmployeeName() %></span><i class="glyphicon glyphicon-log-out"></i></button>
+                    </form>
+                    
+                </li>
+                <li class="init-arrow-down"> <a href="javascript:void(0)"> <span class="gw-menu-text">Quản lý khách hàng</span> <b class="gw-arrow"></b> </a>
+                  <ul class="gw-submenu">
+                    <li> <a href="customer.jsp">Tất cả</a> </li>
+                    <li> <a href="customerMothe.jsp">Mở thẻ</a> </li>
+                    <li> <a href="customerVayCaNhan.jsp">Vay cá nhân</a> </li>
+                    <li> <a href="customerVayTieuThuong.jsp">Vay tiểu thương</a> </li>
+                    <li> <a href="customerVayDoanhNghiep.jsp">Vay doanh nghiệp</a> </li>
+                  </ul>
+                </li>
+                <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>"> <a href="typedeal.jsp" > <span class="gw-menu-text">Quản lý loại giao dịch</span> </a></li>
+                <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>"> <a href="employee.jsp" > <span class="gw-menu-text">Quản lý nhân viên</span> </a></li>
+                <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>" class="init-arrow-down"> <a href="javascript:void(0)"> <span class="gw-menu-text">Quản lý nội dung</span> <b class="gw-arrow"></b> </a>
+                  <ul class="gw-submenu">
+                    <li> <a href="editor.jsp">Trang chủ</a> </li>
+                    <li> <a href="qlMoThe.jsp">Mở thẻ</a> </li>
+                    <li> <a href="qlVayCaNhan.jsp">Vay cá nhân</a> </li>
+                    <li> <a href="qlVayTieuThuong.jsp">Vay tiểu thương</a> </li>
+                    <li> <a href="qlVayDoanhNghiep.jsp">Vay doanh nghiệp</a> </li>
+                  </ul>
+                </li>
+                <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>"> <a href="hotline.jsp" > <span class="gw-menu-text">Số điện thoại</span> </a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--end navigation-->
+        <%
+            htmldisplayObj htmlObj = new htmldisplayObj();
+            htmldisplayDAO htmldisplayDAO = new htmldisplayDAO();
+            ArrayList<htmldisplayObj> htmllist = new ArrayList<htmldisplayObj>();
+            htmllist = htmldisplayDAO.getAllHtml();
+        %>
+        <div class="wrapper">
+            <div class="container">
+                <h3 class="rule-vp-h3-admin">
+                    <span class="rule-vp-span">Quản lý nội dung trang Mở thẻ</span>
+                </h3>
+                <div class="titlesubpage">
+                    <div class="rule-vp-h3-admin">
+                                <span class="rule-vp-span" id="edittxt47"><%=htmldisplayDAO.getHtmlById(47).getHtmlcode()%></span>
+                                <div class="edtcont2">
+                                    <a onclick="asd(47)" id="btnsua47" class="btnedthtmltitcon" ><i class="glyphicon glyphicon-pencil " style="font-size: 15px"></i></a>
+                                </div>
+                                <div class="edt11">
+                                    <form id="form47" style="display: none; ">
+                                        <textarea name="edt47" id="edt47" ></textarea>
+                                        <a class="btna btn btn-default" onclick="show(47)">Cập nhật</a>
+                                    </form>
+                                </div>
+                    </div>
+                </div>
+                    <div class="rule-vp-row">
+                        <h3 class="rule-vp-h3-admin">
+                                <span class="rule-vp-span" id="edittxt31"><%=htmldisplayDAO.getHtmlById(31).getHtmlcode()%></span>
+                                <div class="edtcont2">
+                                    <a onclick="asd(31)" id="btnsua31" class="btnedthtmltitcon" ><i class="glyphicon glyphicon-pencil " style="font-size: 15px"></i></a>
+                                </div>
+                                <div class="edt11">
+                                    <form id="form31" style="display: none; ">
+                                        <textarea name="edt31" id="edt31" ></textarea>
+                                        <a class="btna btn btn-default" onclick="show(31)">Cập nhật</a>
+                                    </form>
+                                </div>
+                        </h3>     
+                        <div class="rule-vp-content-admin">
+                            <span id="edittxt32"><%=htmldisplayDAO.getHtmlById(32).getHtmlcode()%></span>
+                            <div class="edtcont2">
+                                    <a onclick="asd(32)" id="btnsua32" class="btnedthtmltitcon" ><i class="glyphicon glyphicon-pencil "></i></a>
+                                </div>
+                                <div class="edt11">
+                                    <form id="form32" style="display: none; ">
+                                        <textarea name="edt32" id="edt32" ></textarea>
+                                        <a class="btna btn btn-default" onclick="show(32)">Cập nhật</a>
+                                    </form>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="rule-vp-row infor-vp-row">
+                        <h3 class="rule-vp-h3-admin">
+                                <span class="rule-vp-span" id="edittxt33"><%=htmldisplayDAO.getHtmlById(33).getHtmlcode()%></span>
+                                <div class="edtcont2">
+                                    <a onclick="asd(33)" id="btnsua33" class="btnedthtmltitcon" ><i class="glyphicon glyphicon-pencil " style="font-size: 15px"></i></a>
+                                </div>
+                                <div class="edt11">
+                                    <form id="form33" style="display: none; ">
+                                        <textarea name="edt33" id="edt33" ></textarea>
+                                        <a class="btna btn btn-default" onclick="show(33)">Cập nhật</a>
+                                    </form>
+                                </div>
+                        </h3>  
+                        <div class="rule-vp-content-admin" style="display: block;">
+                            <span id="edittxt34"><%=htmldisplayDAO.getHtmlById(34).getHtmlcode()%></span>
+                            <div class="edtcont2">
+                                    <a onclick="asd(34)" id="btnsua34" class="btnedthtmltitcon" ><i class="glyphicon glyphicon-pencil "></i></a>
+                                </div>
+                                <div class="edt11">
+                                    <form id="form34" style="display: none; ">
+                                        <textarea name="edt34" id="edt34" ></textarea>
+                                        <a class="btna btn btn-default" onclick="show(34)">Cập nhật</a>
+                                    </form>
+                                </div>
+                        </div>
+                    </div>
+                    <jsp:include page="boxcode.jsp"/>
+                </div>
+            </div>
+
+        <script src="js/jquery-ui.js"></script> 
+<script src="js/owl.carousel.min.js"></script> 
+
+<!--Local js-->
+<script src="js/5dtv.js"></script>
+<script>
+    $(document).ready(function() {
+    $(".rule-vp-h3").click(function() {
+            $(this).parent().find(".rule-vp-content-admin").toggle();
+        })
+    })
+</script>
+
+<script src="js/jquery.nav.js"></script> 
+<script src="js/myjs.js"></script>
+<script>
+    $(document).ready(function(){
+	//one page selection page
+	$('.navid').onePageNav({
+		currentClass: 'active',
+		changeHash: true,
+		scrollSpeed: 1000,
+		scrollThreshold: 0.5,
+		filter: ':not(.external)',
+		easing: 'swing',
+		begin: function() {
+			//I get fired when the animation is starting
+		},
+		end: function() {
+			//I get fired when the animation is ending
+		},
+		scrollChange: function(jQuerycurrentListItem) {
+			//I get fired when you enter a section and I pass the list item of the section
+		}
+	});	
+
+    })
+</script>
     </body>
 </html>

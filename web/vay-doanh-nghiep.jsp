@@ -4,6 +4,12 @@
     Author     : Ngoc
 --%>
 
+<%@page import="Dao.hotlineDAO"%>
+<%@page import="Dao.htmldisplayDAO"%>
+<%@page import="Modal.htmldisplayObj"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Modal.typeDealObj"%>
+<%@page import="Dao.typeDealDAO"%>
 <%@page import="Dao.employeeDAO"%>
 <%@page import="Modal.employeeObj"%>
 <%@page import="Modal.customerObj"%>
@@ -45,17 +51,27 @@
     </script>
     </head>
     <body>
+        <%
+            typeDealDAO typedao = new typeDealDAO();
+            ArrayList<typeDealObj> typelist = new ArrayList<typeDealObj>();
+            typelist = typedao.getAllTypeDeal();
+            
+            htmldisplayObj htmlObj = new htmldisplayObj();
+            htmldisplayDAO htmldisplayDAO = new htmldisplayDAO();
+            ArrayList<htmldisplayObj> htmllist = new ArrayList<htmldisplayObj>();
+            htmllist = htmldisplayDAO.getAllHtml();
+        %>
         <div class="mdl-header navbar-fixed-top"> 
 	<div class="container">	
       <div id="hamburger"><span></span></div> 
       <a href="index.jsp" class="logo"><img src="images/logo2.png"/></a>
       <div class="menu-top">
 	    <div class="navid">
-            <div class="item-link "><a href="mo-the.jsp">Đăng ký mở thẻ</a></div>
-            <div class="item-link "><a href="vay-ca-nhan.jsp">Vay cá nhân</a></div>
-            <div class="item-link "><a href="vay-tieu-thuong.jsp">Vay tiểu thương</a></div>
-            <div class="item-link active"><a href="vay-doanh-nghiep.jsp">Vay doanh nghiệp</a></div>  
-		</div>
+            <div class="item-link "><a href="mo-the.jsp"><%=typelist.get(0).getTypedealName() %></a></div>
+            <div class="item-link "><a href="vay-ca-nhan.jsp"><%=typelist.get(1).getTypedealName() %></a></div>
+            <div class="item-link "><a href="vay-tieu-thuong.jsp"><%=typelist.get(2).getTypedealName() %></a></div>
+            <div class="item-link active"><a href="vay-doanh-nghiep.jsp"><%=typelist.get(3).getTypedealName() %></a></div>  
+            </div>
       </div>
       
     </div>
@@ -74,28 +90,27 @@
 <div class="body-right">
 	<div class="form-register-vp">
     	<h2 class="form-register-h2">
-    	    ĐĂNG KÝ VAY NHẬN NGAY KHUYẾN MẠI<br/>
-           <span style="font-size:20px;"> DÀNH CHO 190 KHÁCH HÀNG GIẢI NGÂN NHANH NHẤT</span>
+    	    <%=htmldisplayDAO.getHtmlById(50).getHtmlcode()%>
     	</h2>
             <form name="formresign" id="formresign" method="post" >
             <div class="form-group-register">
                 <p class="form-vp-item">
-                    <input name="name" type="text" id="ctl12_hovaten" class="ho_va_ten" placeholder="Họ và tên" /><span class="sp-star-input">*</span><p id="ctl12_hovaten_error"></p>
+                    <input name="name" type="text" id="ctl12_hovaten" class="ho_va_ten" placeholder="Họ và tên" required/><span class="sp-star-input">*</span><p id="ctl12_hovaten_error"></p>
                 </p>
                 <p class="form-vp-item">
-                    <input name="phone" type="text" id="ctl12_sodienthoai" class="so_dien_thoai" placeholder="Số điện thoại" /><span class="sp-star-input">*</span><p id="ctl12_sodienthoai_error"></p>
+                    <input name="phone" type="text" id="ctl12_sodienthoai" class="so_dien_thoai" placeholder="Số điện thoại" required/><span class="sp-star-input">*</span><p id="ctl12_sodienthoai_error"></p>
                 </p>
                 <p class="form-vp-item">
                     <input name="email" type="text" id="ctl12_email" class="email" placeholder="Email" />
                 </p>
                 <p class="form-vp-item">
-                    <input name="company" type="text" id="ctl12_TenDoanhNghiep" class="ten_doanh_nghiep" placeholder="Tên doanh nghiệp" /><span class="sp-star-input">*</span><p id="ctl12_TenDoanhNghiep_error"></p>
+                    <input name="company" type="text" id="ctl12_TenDoanhNghiep" class="ten_doanh_nghiep" placeholder="Tên doanh nghiệp" required/><span class="sp-star-input">*</span><p id="ctl12_TenDoanhNghiep_error"></p>
                 </p>
                 <p class="form-vp-item">
-                    <input name="career" type="text" id="ctl12_NganhNgheKinhDoanh" class="nganh_nghe_kinh_doanh" placeholder="Ngành nghề kinh doanh" /><span class="sp-star-input">*</span><p id="ctl12_NganhNgheKinhDoanh_error"></p>
+                    <input name="career" type="text" id="ctl12_NganhNgheKinhDoanh" class="nganh_nghe_kinh_doanh" placeholder="Ngành nghề kinh doanh" required/><span class="sp-star-input">*</span><p id="ctl12_NganhNgheKinhDoanh_error"></p>
                 </p>
                 <p class="form-vp-item">
-                    <input name="companyNum" type="text" id="ctl12_SoDangKyKinhDoanh" class="so_dang_ky_kinh_doanh" placeholder="Số đăng ký kinh doanh" /><span class="sp-star-input">*</span><p id="ctl12_SoDangKyKinhDoanh_error"></p>
+                    <input name="companyNum" type="text" id="ctl12_SoDangKyKinhDoanh" class="so_dang_ky_kinh_doanh" placeholder="Số đăng ký kinh doanh" required/><span class="sp-star-input">*</span><p id="ctl12_SoDangKyKinhDoanh_error"></p>
                 </p>
                 <p class="form-vp-item" style="margin-bottom:10px;">
                     <input name="employeesupport" type="text" id="ctl12_MaNhanVien" class="ma_nhan_vien" placeholder="Mã nhân viên VPBank" />
@@ -154,113 +169,28 @@
   
     <div class="rule-vp-row">
     	<h3 class="rule-vp-h3">
-        	<span class="rule-vp-span">Thể lệ chương trình khuyến mại</span>
+        	<span class="rule-vp-span"><%=htmldisplayDAO.getHtmlById(39).getHtmlcode()%></span>
             <a class="rule-sp-more">Xem chi tiết</a>	
         </h3>
         <div class="rule-vp-content">
-        <h3>THỂ LỆ CHƯƠNG TRÌNH “VAY NHANH VPBANK” CỦA KHỐI DOANH NGHIỆP</h3>
-        
-
-<strong>1.	Tên chương trình khuyến mại:</strong> “Vay nhanh VPBank”<br>
-<strong>2.	Hàng hóa dịch vụ khuyến mại:</strong> tiền được chuyển vào thẻ tín dụng Doanh nghiệp VPBiz.<br>
-<strong>3.	Thời gian khuyến mại:</strong> 24/05/2017-24/08/2017<br>
-<strong>4.	Phạm vi khuyến mại:</strong> Trên toàn quốc<br>
-<strong>5.	Hình thức khuyến mại:</strong> tiền mặt <br>
-<strong>6.	Khách hàng của chương trình khuyến mại:</strong> Là Doanh nghiệp thuộc phân khúc vừa, nhỏ, siêu nhỏ có nhu cầu sử dụng sản phẩm Vay tín chấp của VPBank. Bao gồm cả khách hàng mới và khách hàng đang nộp hồ sơ vay ở VPBank.<br>
-<strong>7.	Nội dung chi tiết chương trình:</strong><br>
-<strong>a.	Điều kiện chương trình:</strong><br>
-Doanh nghiệp đăng ký sử dụng sản phẩm Vay không tài sản thế chấp tại VPBank thỏa 3 điều kiện:<br>
-*	Mã khuyến mại được đăng ký và phê duyệt sử dụng trong thời gian diễn ra chương trình<br>
-*	Khoản vay giải ngân tối thiểu từ 200.000.000 VNĐ<br>
-*	Doanh nghiệp đồng ý phát hành thẻ tín dụng Doanh nghiệp VPBIZ với hạn mức tối thiểu 50 triệu.<br>
-<strong>b.	Nội dung ưu đãi</strong><br>
-*	Tặng voucher có trị giá là 6.000.000 VNĐ (6 triệu đồng) <br>
-*	Tổng số voucher là 190 voucher.<br>
-*	<strong>Lưu ý:</strong><br>
--	Mỗi Doanh nghiệp chỉ được tham gia chương trình duy nhất 01 lần trong suốt thời gian chương trình diễn ra.<br>
--	Tổng chi phí quà tặng thực hiện chương trình là 1.140.000.000 VNĐ (Một tỷ một trăm bốn mươi triệu đồng).<br>
--	Chương trình có thể dừng mà không cần thông báo trước nếu như ngân sách khuyến mại sử dụng hết trước thời gian kết thúc chương trình.<br>
--	Không áp dụng đồng thời cùng các chương trình khuyến mãi khác <br>
-<strong>c.	Cách thức nhận quà </strong><br>
-•	6.000.000 VNĐ sẽ được chuyển vào thẻ VPBIZ Credit của Doanh nghiệp ngay khi khoản vay được giải ngân trong thời gian 30 ngày làm việc.<br>
-•	Trong trường hợp khách hàng trúng voucher khuyến mãi không có nhu cầu vay trong 15 ngày làm việc thì voucher tự động hết hạn.<br>
-•	Trường hợp khách hàng trúng voucher khuyến mãi không hoàn thiện hồ sơ vay trong vòng 15 ngày làm việc thì voucher sẽ tự động hết hạn. Voucher của khách hàng sẽ được áp dụng cho khách hàng đăng ký tiếp theo.<br>
-•	Quy định về việc chuyển nhượng voucher<br>
-*	Nếu trong điều kiện Doanh nghiệp không có nhu cầu hoặc không đủ điều kiện vay thì Doanh nghiệp có thể tặng mã Voucher đó cho 01 doanh nghiệp khác trong vòng 15 ngày làm việc kể từ ngày nhận Voucher khuyến mãi.<br>
-*	Doanh nghiệp email đến Ban tổ chức theo địa chỉ: marketing-sme@vpbank.com.vn để thông báo việc tặng mã cho Doanh nghiệp khác với các trường thông tin sau: <br>
--	Tên Doanh nghiệp<br>
--	Mã số thuế<br>
--	Người liên hệ<br>
--	Số điện thoại liên hệ<br>
--	Số năm hoạt động<br>
--	Ngành nghề hoạt động<br>
--	Nhu cầu vay bao nhiêu tiền<br>
-*	Ban tổ chức sẽ chủ động liên hệ với Doanh nghiệp được giới thiệu theo thông tin trong email được cung cấp.<br>
-*	Voucher khuyến mãi chỉ được chuyển nhận một lần. Sau 05 ngày làm việc nếu VPBank không liên hệ được với Doanh nghiệp được chuyển nhượng voucher, voucher sẽ tự động hết hạn.<br>
-<strong>8.	Trách nhiệm thông báo:</strong><br>
-Nội dung Thể lệ chương trình ưu đãi của Chương trình sẽ được VPBank thông báo đến Khách hàng qua các kênh sau:<br>
-a)	Trang web chính thức của VPBank: www.vpbank.com.vn và/hoặc; vaynhanhvpbank.vn<br>
-b)	Các phương tiện truyền thông đại chúng như: Báo, tạp chí<br>
-c)	Email và/hoặc sms qua điện thoại.<br>
-<strong>9.	Các quy định khác:</strong><br>
-a)	Bằng việc tham gia chương trình khuyến mại này, Khách hàng chấp nhận tất cả các Điều khoản và Điều kiện được liệt kê trong Thể lệ và các nội dung thay đổi liên quan đến Thể lệ này (nếu có);<br>
-b)	VPBank sẽ không chịu trách nhiệm đối với bất cứ khiếu nại nào liên quan đến việc VPBank không thể liên lạc được với Khách hàng để thông báo ưu đãi hoặc Khách hàng không biết đến Chương trình;<br>
-c)	VPBank được toàn quyền sử dụng hình ảnh, danh tính của Khách hàng nhận được khuyến mại trong các hoạt động quảng bá của VPBank;
-d)	VPBank là người quyết định cuối cùng trong việc xét duyệt các giao dịch hợp lệ và thực hiện trao thưởng;<br>
-e)	Các khách hàng nhận thưởng chịu các khoản thuế, phí phát sinh liên quan (nếu có);<br>
-f)	Các nội dung khác không được quy định trong Thể lệ này sẽ áp dụng theo các Quy định và Quy chế hiện hành có liên quan của VPBank;<br>
-g)	Khi có sự thay đổi liên quan đến chương trình, VPBank sẽ thông báo tại website www.vpbank.com.vn và tại www.vaynhanhvpbank.vn.<br>
-Chúng tôi cam kết thực hiện đúng và hoàn toàn chịu trách nhiệm về chương trình khuyến mại trên theo các quy định của pháp luật hiện hành. <br> 
-
-
-
+            <%=htmldisplayDAO.getHtmlById(40).getHtmlcode()%>
         </div>
     </div>
-    
     <div class="rule-vp-row infor-vp-row">
     	<h3 class="rule-vp-h3">
-        	<span class="rule-vp-span">Chi tiết các gói vay Doanh nghiệp</span>
+        	<span class="rule-vp-span"><%=htmldisplayDAO.getHtmlById(41).getHtmlcode()%></span>
             <a class="rule-sp-more">Xem chi tiết</a>	
         </h3>
         <div class="rule-vp-content" style="display: block;">
-        	<h3>VAY NHANH DOANH NGHIỆP – VAY KHÔNG THẾ CHẤP</h3>
-<strong>1.	Ưu điểm sản phẩm: </strong><br>
--	Không giới hạn số năm hoạt động<br>
--	Không ràng buộc doanh thu tối thiểu<br>
--	Không yêu cầu tài sản thế chấp<br>
--	Hồ sơ chứng minh mục đích vay đơn giản<br>
--	Lãi suất cạnh tranh<br>
--	Hạn mức cho vay lên đến 5 tỷ đồng<br>
--	Thời gian vay: 36 tháng<br>
-
-<strong>2.	Đối tượng Khách hàng:</strong> Khách hàng Doanh nghiệp vừa và nhỏ<br>
-
-<strong>3.	Hồ sơ yêu cầu:</strong> <br>
--	Báo cáo tài chính<br>
--	Hồ sơ chứng minh mục đích sử dụng vốn<br>
--	Hồ sơ khác theo quy định của VPBank theo từng thời kỳ<br>
-
-<strong>4.	Để tìm hiểu thêm, vui lòng xem tại đây:</strong><br>
-<a href="http://sme.vpbank.com.vn/san-pham/san-pham-tien-vay/cho-vay-tin-chap">http://sme.vpbank.com.vn/san-pham/san-pham-tien-vay/cho-vay-tin-chap</a> 
-
-
+            <%=htmldisplayDAO.getHtmlById(42).getHtmlcode()%>
         </div>
     </div>
-    
-    <div class="rule-vp-row list-vp-row">
-    	<h3 class="rule-vp-h3">
-        	<span class="rule-vp-span">Danh sách các Doanh nghiệp đã đăng ký nhận voucher</span>
-            <a class="rule-sp-more">Xem chi tiết</a>	
-        </h3>
-        <div class="rule-vp-content" style="text-align:center;">
-            <p>
-                Danh sách sẽ được cập nhật trong thời gian sớm nhất.
-            </p>            
-        </div>
-    </div>
-    
 </div>
-<p class="landing-vp-phone"><a onclick='confirmcall()'>19001234</a></p>
+    <% 
+        hotlineDAO hotlinedao = new hotlineDAO();
+        int hotline = hotlinedao.getHotlineById(1).getHotlineNumber();
+    %>
+    <p class="landing-vp-phone"><a onclick='confirmcall()'><%=hotline %></a></p>
 	</div>
 <a href="#" class="vp-gotop">
     	<img src="images/vp_gotop.png"><br>
@@ -282,8 +212,8 @@ Chúng tôi cam kết thực hiện đúng và hoàn toàn chịu trách nhiệm
 </script>
 <script>
     function confirmcall() {
-        if (confirm("Vui lòng gọi tới tổng đài 19001234. Trân trọng!")) {
-            window.location = "tel:19001234";
+        if (confirm("Vui lòng gọi tới tổng đài "+<%=hotline %>+". Trân trọng!")) {
+            window.location = "tel: "+<%=hotline %>;
         };
     }
 </script>

@@ -1735,6 +1735,13 @@ a{cursor:pointer}
     padding-bottom: 20px;
     cursor:pointer;
 }
+.rule-vp-h3-admin {
+    border-bottom: 1px solid #dcdcdc;
+    overflow: hidden;
+    padding-bottom: 20px;
+    cursor:pointer;
+    position: relative;
+}
 .rule-vp-span {
     background: rgba(0, 0, 0, 0) url("../images/vp_14.png") no-repeat scroll left center;
     color: #008546;
@@ -2110,32 +2117,36 @@ box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
 .center{
     width: 100%;
     float: left;
+    display: flex;
 }
 .boxitem{
+     flex: 1;
     width: 23%;
     border: 2px solid #008546;
     border-radius: 10px;
-    min-height: 500px;
+    min-height:  300px;
     margin-left: 10px;
     margin-right: 10px;
     display: inline-block;
     vertical-align:top ;
 }
 .boxitem2{
+     flex: 1;
     width: 30%;
     border: 2px solid #008546;
     border-radius: 7px;
-    min-height: 300px;
+    min-height:  300px;
     margin-left: 10px;
     margin-right: 10px;
     display: inline-block;
     vertical-align:top ;
 }
 .boxitem3{
+     flex: 1;
     width: 23%;
     border: 2px solid #008546;
     border-radius: 7px;
-    min-height:750px;
+    min-height:350px;
     margin-left: 10px;
     margin-right: 10px;
     display: inline-block;
@@ -2193,6 +2204,9 @@ box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
     text-align: justify;
     font-size: 18px;
 }
+.contentbox ul{
+    padding-left: 10px;
+}
 .boxitem .describlebox{
     font-weight: lighter;
     height: 35%;
@@ -2206,6 +2220,7 @@ box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
     font-weight: lighter;
     position: relative;
 }
+
 .boxitem .profilelisbox{
     margin-top: 10px;
     text-align:left;
@@ -2421,6 +2436,11 @@ textarea
     text-decoration: none;
     color: white;
 }
+.btnedthtmltitcon{
+    display:inline-block;
+    text-decoration: none;
+    color: black;
+}
 .edttit .glyphicon{
     color: white;
     font-size: 15px;
@@ -2437,4 +2457,39 @@ textarea
 }
 .boxitem2 .edtcont{
     position: relative;
+}
+
+textarea{
+    height: 100px;
+}
+.edt11{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.edtcont2{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.edtcont3{
+    float: right;
+}
+.rule-vp-content-admin{
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 50px;
+}
+.titlesubpage{
+    width: 100%;
+    display: inline-block;
+    padding-top: 20px;
+}
+.titlesubpage span{
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
 }

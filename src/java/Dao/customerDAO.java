@@ -22,26 +22,39 @@ import java.util.logging.Logger;
  * @author Ngoc
  */
 public class customerDAO {
-        public int addCustom(String customerName, String email, int phone, String address, int employeesupport, String company, String career, int companyNum, int typedealId, int employeeId) throws ClassNotFoundException, SQLException{
-        Connection conn = database.getConnection();
-        PreparedStatement st = conn.prepareStatement("INSERT INTO customer(customerName,email,phone,address,employeesupport,company,career,companyNum,typedealId,employeeId) VALUES (?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-        st.setString(1, customerName);
-        st.setString(2, email);
-        st.setInt(3, phone);
-        st.setString(4, address);
-        st.setInt(5, employeesupport);
-        st.setString(6, company);
-        st.setString(7, career);
-        st.setInt(8, companyNum);
-        st.setInt(9, typedealId);
-        st.setInt(10, employeeId);
-        st.executeUpdate();
-        ResultSet rs = st.getGeneratedKeys();
+        public int addCustom(String customerName, String email, int phone, String address, int employeesupport, String company, String career, int companyNum, int typedealId, int employeeId){
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
         int customID = 0;
-        if(rs.next()){
-            customID = rs.getInt(1);
-        }else{
-            customID = -1;
+            try {
+                conn = database.getConnection();
+                st = conn.prepareStatement("INSERT INTO customer(customerName,email,phone,address,employeesupport,company,career,companyNum,typedealId,employeeId) VALUES (?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                st.setString(1, customerName);
+                st.setString(2, email);
+                st.setInt(3, phone);
+                st.setString(4, address);
+                st.setInt(5, employeesupport);
+                st.setString(6, company);
+                st.setString(7, career);
+                st.setInt(8, companyNum);
+                st.setInt(9, typedealId);
+                st.setInt(10, employeeId);
+                st.executeUpdate();
+                rs = st.getGeneratedKeys();
+                if(rs.next()){
+                    customID = rs.getInt(1);
+                }else{
+                    customID = -1;
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(customerDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(customerDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+            try { rs.close(); } catch (Exception e) { /* ignored */ }
+            try { st.close(); } catch (Exception e) { /* ignored */ }
+            try { conn.close(); } catch (Exception e) { /* ignored */ }
         }
         return customID;
     }

@@ -46,7 +46,7 @@
                 employeeObj employee = new employeeObj();
               try{
                   int pass = Integer.parseInt(pwd);
-                  int result = employeeDAO.checkLogin("admin", 123);
+                  int result = employeeDAO.checkLogin(acc, pass);
                   employee = employeeDAO.getEmployeeById(result);
                   if(result!=-1){
                       session.setAttribute("user",employee);

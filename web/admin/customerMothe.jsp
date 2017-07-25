@@ -63,7 +63,7 @@
                 </li>
                 <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>"> <a href="typedeal.jsp" > <span class="gw-menu-text">Quản lý loại giao dịch</span> </a></li>
                 <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>"> <a href="employee.jsp" > <span class="gw-menu-text">Quản lý nhân viên</span> </a></li>
-                <li class="init-arrow-down"> <a href="javascript:void(0)"> <span class="gw-menu-text">Quản lý nội dung</span> <b class="gw-arrow"></b> </a>
+                <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>" class="init-arrow-down"> <a href="javascript:void(0)"> <span class="gw-menu-text">Quản lý nội dung</span> <b class="gw-arrow"></b> </a>
                   <ul class="gw-submenu">
                     <li> <a href="editor.jsp">Trang chủ</a> </li>
                     <li> <a href="qlMoThe.jsp">Mở thẻ</a> </li>
@@ -72,6 +72,7 @@
                     <li> <a href="qlVayDoanhNghiep.jsp">Vay doanh nghiệp</a> </li>
                   </ul>
                 </li>
+                <li style="visibility: <%=user.equals("admin")?"visible":"hidden"%>"> <a href="hotline.jsp" > <span class="gw-menu-text">Số điện thoại</span> </a></li>
               </ul>
             </div>
           </div>
@@ -80,7 +81,9 @@
 
         <div class="wrapper">
         <div class="container">
-            
+            <h3 class="rule-vp-h3-admin">
+                <span class="rule-vp-span">Quản lý khách hàng đăng ký Mở thẻ</span>
+            </h3>
             <div class="tblcontent">
                 <form action="updateEmployeeSupport.jsp">
                     <%

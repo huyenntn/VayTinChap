@@ -4,6 +4,12 @@
     Author     : Ngoc
 --%>
 
+<%@page import="Dao.hotlineDAO"%>
+<%@page import="Modal.typeDealObj"%>
+<%@page import="Dao.typeDealDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Dao.htmldisplayDAO"%>
+<%@page import="Modal.htmldisplayObj"%>
 <%@page import="Dao.employeeDAO"%>
 <%@page import="Modal.employeeObj"%>
 <%@page import="Modal.customerObj"%>
@@ -40,16 +46,26 @@
     
     </head>
     <body>
+        <%
+            typeDealDAO typedao = new typeDealDAO();
+            ArrayList<typeDealObj> typelist = new ArrayList<typeDealObj>();
+            typelist = typedao.getAllTypeDeal();
+
+            htmldisplayObj htmlObj = new htmldisplayObj();
+            htmldisplayDAO htmldisplayDAO = new htmldisplayDAO();
+            ArrayList<htmldisplayObj> htmllist = new ArrayList<htmldisplayObj>();
+            htmllist = htmldisplayDAO.getAllHtml();
+        %>
          <div class="mdl-header navbar-fixed-top"> 
 	<div class="container">	
       <div id="hamburger"><span></span></div> 
       <a href="index.jsp" class="logo"><img src="images/logo2.png"/></a>
       <div class="menu-top">
 	    <div class="navid">
-            <div class="item-link active"><a href="mo-the.jsp">Đăng ký mở thẻ</a></div>
-            <div class="item-link"><a href="vay-ca-nhan.jsp">Vay cá nhân</a></div>
-            <div class="item-link "><a href="vay-tieu-thuong.jsp">Vay tiểu thương</a></div>
-            <div class="item-link "><a href="vay-doanh-nghiep.jsp">Vay doanh nghiệp</a></div>  
+            <div class="item-link active"><a href="mo-the.jsp"><%=typelist.get(0).getTypedealName() %></a></div>
+            <div class="item-link"><a href="vay-ca-nhan.jsp"><%=typelist.get(1).getTypedealName() %></a></div>
+            <div class="item-link "><a href="vay-tieu-thuong.jsp"><%=typelist.get(2).getTypedealName() %></a></div>
+            <div class="item-link "><a href="vay-doanh-nghiep.jsp"><%=typelist.get(3).getTypedealName() %></a></div>  
 		</div>
       </div>
       
@@ -69,7 +85,7 @@
 <div class="body-right">
     <div class="form-register-vp">
         <h2 class="form-register-h2">
-    	    Đăng ký Mở thẻ
+    	    <%=htmldisplayDAO.getHtmlById(47).getHtmlcode()%>
     	</h2>
         <form name="formresign" id="formresign" method="post" onsubmit="return validateForm()" >
             <div class="form-group-register"/>
@@ -143,10 +159,33 @@
     </div>
 </div>
 <div style="clear:both"></div>
+
 <div class="body-center">
+        <div class="rule-vp-row">
+    	<h3 class="rule-vp-h3">
+        	<span class="rule-vp-span"><%=htmldisplayDAO.getHtmlById(31).getHtmlcode()%></span>
+            <a class="rule-sp-more">Xem chi tiết</a>	
+        </h3>
+        <div class="rule-vp-content">
+            <%=htmldisplayDAO.getHtmlById(32).getHtmlcode()%>
+        </div>
+    </div>
     
+    <div class="rule-vp-row infor-vp-row">
+    	<h3 class="rule-vp-h3">
+        	<span class="rule-vp-span"><%=htmldisplayDAO.getHtmlById(33).getHtmlcode()%></span>
+            <a class="rule-sp-more">Xem chi tiết</a>	
+        </h3>
+        <div class="rule-vp-content" style="display: block;">
+            <%=htmldisplayDAO.getHtmlById(34).getHtmlcode()%>
+        </div>
+    </div>
 </div>
-<p class="landing-vp-phone"><a onclick='confirmcall()'>19001234</a></p>
+    <% 
+        hotlineDAO hotlinedao = new hotlineDAO();
+        int hotline = hotlinedao.getHotlineById(1).getHotlineNumber();
+    %>
+    <p class="landing-vp-phone"><a onclick='confirmcall()'><%=hotline %></a></p>
 	</div>
 <a href="#" class="vp-gotop">
     	<img src="images/vp_gotop.png"><br>
@@ -154,7 +193,7 @@
     </a>
 
 <jsp:include page="footer.jsp"/>
-        <script src="js/jquery-ui.js"></script> 
+<script src="js/jquery-ui.js"></script> 
 <script src="js/owl.carousel.min.js"></script> 
 
 <!--Local js-->
@@ -168,8 +207,8 @@
 </script>
 <script>
     function confirmcall() {
-        if (confirm("Vui lòng gọi tới tổng đài 19001234. Trân trọng!")) {
-            window.location = "tel:19001234";
+        if (confirm("Vui lòng gọi tới tổng đài "+<%=hotline %>+". Trân trọng!")) {
+            window.location = "tel:"+<%=hotline %>;
         };
     }
 </script>

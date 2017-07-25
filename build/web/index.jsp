@@ -4,6 +4,7 @@
     Author     : Ngoc
 --%>
 
+<%@page import="Dao.hotlineDAO"%>
 <%@page import="Dao.htmldisplayDAO"%>
 <%@page import="Modal.htmldisplayObj"%>
 <%@page import="java.util.ArrayList"%>
@@ -64,12 +65,18 @@
                 <div class="container">	
                 <div id="hamburger"><span></span></div> 
                 <a href="index.jsp" class="logo"><img src="images/logo2.png"/></a>
+                <%
+                    typeDealDAO typedao = new typeDealDAO();
+                    ArrayList<typeDealObj> typelist = new ArrayList<typeDealObj>();
+                    typelist = typedao.getAllTypeDeal();
+                %>
                 <div class="menu-top">
                     <div class="navid">
-                    <div class="item-link"><a href="#landing_opencard">Đăng ký mở thẻ</a></div>
-                    <div class="item-link"><a href="#landing_persion">Vay cá nhân</a></div>
-                    <div class="item-link"><a href="#landing_enterprise">Vay doanh nghiệp</a></div>
-                    <div class="item-link "><a href="#landing_small_business">Vay tiểu thương</a></div>       
+                        <div class="item-link"><a href="#landing_opencard"><%=typelist.get(0).getTypedealName() %></a></div>
+                    <div class="item-link"><a href="#landing_persion"><%=typelist.get(1).getTypedealName() %></a></div>
+                    <div class="item-link "><a href="#landing_small_business"><%=typelist.get(2).getTypedealName() %></a></div> 
+                    <div class="item-link"><a href="#landing_enterprise"><%=typelist.get(3).getTypedealName() %></a></div>
+                          
                     </div>
                 </div>
               </div>
@@ -101,15 +108,6 @@
       </div>
     </div>
 
-    <div class="item">
-      <a href="index.jsp" ><img src="images/vay nhanh VN.JPG" alt="Chania" height="350px"></a>
-      <div class="carousel-caption">
-        <h3>Khuyến mãi 3</h3>
-        <p>Mở thẻ!</p>
-      </div>
-    </div>
-  </div>
-
   <!-- Left and right controls -->
   <a class="left carousel-control" href="#myCarousel" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left"></span>
@@ -119,12 +117,9 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>
-        <%
-        htmldisplayObj htmlObj = new htmldisplayObj();
+  </div></div>
+    <%
         htmldisplayDAO htmldisplayDAO = new htmldisplayDAO();
-        ArrayList<htmldisplayObj> htmllist = new ArrayList<htmldisplayObj>();
-        htmllist = htmldisplayDAO.getAllHtml();
     %>
 <!------------Mở thẻ------------------------->
 <div class="landing-persion" id="landing_opencard">
@@ -285,7 +280,11 @@
             </div>
       </div> 
     </div>
-	<p class="landing-vp-phone-index"><a onclick='confirmcall()'>19001234</a></p>
+    <% 
+        hotlineDAO hotlinedao = new hotlineDAO();
+        int hotline = hotlinedao.getHotlineById(1).getHotlineNumber();
+    %>
+    <p class="landing-vp-phone-index"><a onclick='confirmcall()'><%=hotline %></a></p>
 
       
 <a href="#" class="vp-gotop">
@@ -308,8 +307,8 @@
 </script>
 <script>
     function confirmcall() {
-        if (confirm("Vui lòng gọi tới tổng đài 19001234. Trân trọng!")) {
-            window.location = "tel:19001234";
+        if (confirm("Vui lòng gọi tới tổng đài "+<%=hotline %>+". Trân trọng!")) {
+            window.location = "tel: "+<%=hotline %>;
         };
     }
 </script>
